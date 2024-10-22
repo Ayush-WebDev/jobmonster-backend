@@ -21,17 +21,17 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 app.use(express.json());
-app.use(express.static(path.resolve(__dirname, "./client/dist")));
+app.use(express.static(path.resolve(__dirname, "./public")));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.JWT_SECRET));
 app.use("/api/v1/jobs", authMiddleware, jobRouter);
 app.use("/api/v1/auth", authRouter);
-console.log(path.resolve("./public", "index.html"));
+// console.log(path.resolve("./public", "index.html"));
 
 // We place all the files from distt folder in our server's public folder and have a route for the all the pages and render index.html
-app.use("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./client/dist", "index.html"));
-});
+// app.use("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "./client/dist", "index.html"));
+// });
 app.use(notFoundMiddleware, errorHandlerMiddleware);
 configSettings;
 const start = async () => {
